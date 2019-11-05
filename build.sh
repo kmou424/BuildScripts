@@ -23,3 +23,5 @@ if [ ! -d "~/work/log/$DATE" ] then
 else
         cp build.log ~/work/log/$DATE/$TIME/build.log
 fi
+
+echo 'Your logs have been stored in ~/work/log/$DATE/$TIME directory"
