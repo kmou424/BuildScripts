@@ -6,22 +6,22 @@ DATE=`date --date='0 days ago' "+%Y-%m-%d"`
 TIME=`date --date='0 days ago' "+%H-%M-%S"`
 
 # Create work root directory
-if [ ! -d "/home/kmou424/work/" ]; then
+if [ ! -d "~/work/" ]; then
 	mkdir ~/work
 fi
 
 # Create log root directory
-if [ ! -d "/home/kmou424/work/log/" ]; then
+if [ ! -d "~/work/log/" ]; then
 	mkdir ~/work/log
 fi
 
 # Create log base directory
-if [ ! -d "/home/kmou424/work/log/$DATE/" ]; then
+if [ ! -d "~/work/log/$DATE/" ]; then
         mkdir ~/work/log/$DATE
 fi
 
 # Create time base directory
-if [ ! -d "/home/kmou424/work/log/$DATE/$TIME/" ]; then
+if [ ! -d "~/work/log/$DATE/$TIME/" ]; then
 	mkdir ~/work/log/$DATE/$TIME
 fi
 
