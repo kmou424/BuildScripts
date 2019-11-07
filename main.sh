@@ -4,9 +4,13 @@
 
 function build()
 {
+    #thread
+    if[ "build_j" == '0' ];then
+        $build_j=$(grep 'processor' /proc/cpuinfo | sort -u | wc -l)
+    fi
     . build/envsetup.sh
     lunch havoc_violet-userdebug
-    mka bacon -j16 > build_full.log 2>&1
+    mka bacon -j$build_j > build_full.log 2>&1
 }
 
 function clean()
@@ -49,8 +53,9 @@ function logcater()
 }
 
 
-
 [ $# -eq '0' ] && echo "Argument needed!"
+#Variable
+build_j='0'
 build='0'
 clean='0'
 log='0'
@@ -67,6 +72,11 @@ while [[ $# -ge 1 ]]; do
     -l|l|log|-log|logcater|-logcater)
       shift
       log='1'
+      ;;
+    -j|j|thread|-thread)
+      shift
+      build_j="$1"
+      shift
       ;;
     *)
       echo -ne "Wrong argument!"
