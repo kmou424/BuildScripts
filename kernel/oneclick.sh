@@ -7,7 +7,7 @@ printf "* Clean up previous build files\n\n"
 rm -rf out
 printf "* Begin to build"
 printf "* Build Thread: $3 \n\n"
-bash build.sh $3 && bash pack_dtbo.sh && bash pack_kernel.sh $KERNEL_NAME
+bash prepare $1 && bash build.sh $3 && bash pack_dtbo.sh && bash pack_kernel.sh $KERNEL_NAME && bash succeed.sh
 printf "* Uploading kernel\n\n"
 
 mv SenaKernel* ../SenaKernel/$BRANCH
