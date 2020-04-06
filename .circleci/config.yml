@@ -1,0 +1,27 @@
+version: 2.1
+jobs:
+  compile:
+   docker:
+      - image: ubuntu:19.04
+   steps:
+      - run:
+          command: |
+           apt-get -y update && apt-get -y upgrade && apt-get -y install bc build-essential zip gcc clang libc6 curl libstdc++6 git wget libssl-dev zstd
+           git clone --depth=1 https://github.com/kmou424/marisa_kernel_xiaomi_sm6150 -b Marisa
+           cd marisa_kernel_xiaomi_sm6150
+           git clone https://github.com/kmou424/BuildScripts -b master
+           git clone https://github.com/kmou424/MarisaConfigs -b master
+           VERSION=$(cat MarisaConfigs/version)
+           mv BuildScripts/kernel/flasher flasher
+           mv BuildScripts/kernel/prepare.sh prepare.sh
+           mv BuildScripts/kernel/succeed.sh succeed.sh
+           rm -rf BuildScripts MarisaConfigs
+           source prepare.sh $VERSION
+           git clone https://github.com/kmou424/myscripts -b master
+           source myscripts/kernel.sh $VERSION
+           source succeed.sh
+workflows:
+  cooking:
+  welcome:
+    jobs:
+      - compile
